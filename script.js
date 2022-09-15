@@ -10,17 +10,33 @@
 // leaving just the string "PLAYER WINS" or "COMPUTER WINS" and save it to a variable (winner)
 // FINALLY: return all three variables using an array
 // return [VALUE1, VALUE2, VALUE3]
+let gameInfo;
+let playerScore = 0;
+let computerScore = 0;
+let plays = 0;
     const rollDice = () =>{
     let playerDice = Math.ceil(Math.random() * 6);
     let computerDice = Math.ceil(Math.random() * 6);
-    const winner = playerDice > computerDice ? `PLAYER WINS` : 'COMPUTER WINS'
-    return [playerDice, computerDice, winner];
-}
-console.log(rollDice());
+    //const winner = playerDice > computerDice ? `PLAYER WINS` : 'COMPUTER WINS'
+    const winner = playerDice == computerDice ? `TIE` : (playerDice > computerDice) ? 'PLAYER WINS' : 'COMPUTER WINS';
+    gameInfo = [playerDice, computerDice, winner];
+    playerDice > computerDice ? playerScore++ : computerScore++
+    plays++;
+    console.log(plays)
+    return gameInfo;
+    }
+//console.log(rollDice());
 // ============ Task 2 ==============================
 // Let's update our UI (User Interface)
 // Create a function (displayScore)
-const displayScore = () =>
+    const playBtn = document.querySelector('#play-game')
+    playBtn.addEventListener('click', rollDice)
+    const resetBtn = document.querySelector(`#reset`)
+    resetBtn.addEventListener('click', ()=>{ console.log("RESET"); computerScore= 0; playerScore=0; plays= 0})
+    const displayScore = () =>{
+        var newScore = document.createElement('div');
+        newScore.innerText(`Player: ${playerScore} Computer: ${computerScore}`)
+    }
 
 // Create a new a div displaying:
 // Computer Score: , Player Score:  & the Winner:
